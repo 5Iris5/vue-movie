@@ -4,6 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// 跨域
+import axios from 'axios'
+Vue.prototype.$axios = axios
+
+// 全局环境下配置过滤器
+Vue.filter('setWH', (url, arg) => {
+  return url.replace((/w\.h/), arg);
+})
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
