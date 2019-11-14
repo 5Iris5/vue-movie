@@ -20,9 +20,9 @@
                     </div>
                 </li> -->
                 <li v-for="item in moviesList" :key="item.id">
-                    <div class="img"><img :src="item.img | setWH('128.180')"></div>
+                    <div class="img"><img :src="item.img | setWH('128.180')" @click="handleToDetail(item.id)"></div>
                     <div class="info">
-                        <p><span>{{ item.nm }}</span><span>{{ item.sc }}</span></p>
+                        <p @click="handleToDetail(item.id)"><span>{{ item.nm }}</span><span>{{ item.sc }}</span></p>
                         <p>{{ item.enm }}</p>
                         <p>{{ item.cat }}</p>
                         <p>{{ item.rt }}</p>
@@ -44,6 +44,10 @@ export default {
         }
     },
     methods: {
+        handleToDetail(movieId){
+            console.log('movieId: ' + movieId);
+            this.$router.push('/movie/detail/3/' + movieId);
+        },
         cancalRequest(){
             if(typeof this.source === 'function'){
                 this.source('请求终止...');
