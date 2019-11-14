@@ -1,35 +1,38 @@
 <template>
     <div class="cinema_body">
-        <ul>
-            <!-- <li>
-                <div>
-                    <span>大地影院(澳东世纪店)</span>
-                    <span class="q"><span class="price">22.9</span> 元起</span>
-                </div>
-                <div class="address">
-                    <span>金州区大连经济技术开发区澳东世纪3层</span>
-                    <span>1763.5km</span>
-                </div>
-                <div class="card">
-                    <div>小吃</div>
-                    <div>折扣卡</div>
-                </div>
-            </li> -->
-            <li v-for="item in cinemasList" :key="item.id">
-                <div>
-                    <span>{{ item.nm }}</span>
-                    <span class="q"><span class="price">{{ item.sellPrice }}</span> 元起</span>
-                </div>
-                <div class="address">
-                    <span>{{ item.addr }}</span>
-                    <span>{{ item.distance }}</span>
-                </div>
-                <div class="card">
-                    <!-- 遍历对象(键值在前，键名在后) num: 键值, key: 键名-->
-                    <div v-for="(num, key) in item.tag" :key="key" v-if="num === 1" :class="key | formatCardClass(key)">{{ key | formatCard(key) }}</div>
-                </div>
-            </li>
-        </ul>
+        <Loading v-if="isLoading"></Loading>
+        <Scroller v-else> 
+            <ul>
+                <!-- <li>
+                    <div>
+                        <span>大地影院(澳东世纪店)</span>
+                        <span class="q"><span class="price">22.9</span> 元起</span>
+                    </div>
+                    <div class="address">
+                        <span>金州区大连经济技术开发区澳东世纪3层</span>
+                        <span>1763.5km</span>
+                    </div>
+                    <div class="card">
+                        <div>小吃</div>
+                        <div>折扣卡</div>
+                    </div>
+                </li> -->
+                <li v-for="item in cinemasList" :key="item.id">
+                    <div>
+                        <span>{{ item.nm }}</span>
+                        <span class="q"><span class="price">{{ item.sellPrice }}</span> 元起</span>
+                    </div>
+                    <div class="address">
+                        <span>{{ item.addr }}</span>
+                        <span>{{ item.distance }}</span>
+                    </div>
+                    <div class="card">
+                        <!-- 遍历对象(键值在前，键名在后) num: 键值, key: 键名-->
+                        <div v-for="(num, key) in item.tag" :key="key" v-if="num === 1" :class="key | formatCardClass(key)">{{ key | formatCard(key) }}</div>
+                    </div>
+                </li>
+            </ul>
+        </Scroller>
     </div>
 </template>
 
@@ -38,16 +41,26 @@ export default {
     name: 'CList',
     data(){
         return {
-            cinemasList: []
+            cinemasList: [],
+            isLoading: true,
+            prevCityId: -1
         }
     },
-    mounted(){
-        this.$axios.get('/api/cinemaList?cityId=10').then((res) => {
+    activated(){
+        var cityId = this.$store.state.city.id;
+        this.isLoading = true;
+        if(this.prevCityId === cityId){
+            this.isLoading = false;
+            return
+        }
+        this.$axios.get('/api/cinemaList?cityId=' + cityId).then((res) => {
             var msg = res.data.msg;
             if(msg === 'ok'){
                 console.log(res);
+                this.isLoading = false;
                 var cinemas = res.data.data.cinemas;
                 this.cinemasList = cinemas;
+                this.prevCityId = cityId;
             }
         })
     },

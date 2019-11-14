@@ -8,7 +8,8 @@
         </div>
         <div class="search_result">
             <h3>电影/电视剧/综艺</h3>
-            <ul>
+            <Loading v-if="isLoading"></Loading>
+            <ul v-else>
                 <!-- <li>
                     <div class="img"><img src="/static/images/movie_1.jpg"></div>
                     <div class="info">
@@ -38,7 +39,8 @@ export default {
     data(){
         return {
             message: '',
-            moviesList: []
+            moviesList: [],
+            isLoading: false
         }
     },
     methods: {
@@ -50,14 +52,17 @@ export default {
     },
     watch: {
         message(newVal) {
+            var cityId = this.$store.state.city.id;
+            this.isLoading = true;
             // 调用接口 -》函数防抖！！！
             var that = this;
             this.cancalRequest();
-            this.$axios.get('/api/searchList?cityId=10&kw=' + newVal, {
+            this.$axios.get('/api/searchList?cityId=' + cityId + '&kw=' + newVal, {
                 cancelToken: new this.$axios.CancelToken((c) => {
                     that.source = c;
                 })
             }).then((res) => {
+                this.isLoading = false;
                 console.log(newVal);  
                 console.log(res);
                 var msg = res.data.msg;
