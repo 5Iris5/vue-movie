@@ -11,6 +11,7 @@ Vue.prototype.$axios = axios
 
 // 全局环境下配置过滤器
 Vue.filter('setWH', (url, arg) => {
+  url = url + '';  // 确保url一定是字符串格式
   return url.replace((/w\.h/), arg);
 })
 
