@@ -71,7 +71,7 @@
 				</ul>
 			</div> -->
             <div class="detail_list">
-				<div class="detail_list_bg"></div>
+				<div class="detail_list_bg" :style="{ 'background-image': 'url('+ movieimg.replace(/w\.h/, 148.208) +')' }"></div>
 				<div class="detail_list_filter"></div>
 				<div class="detail_list_content">
 					<div class="detail_list_img">
@@ -110,7 +110,8 @@ export default {
     // 怎么拿到当前点击的电影ID？
     data(){
         return {
-            movieDetail: {}
+			movieDetail: {},
+			movieimg: ''   // 背景图片格式问题 -> 保证一定是字符串格式
         }
     },
     props: ['movieId'],
@@ -127,7 +128,8 @@ export default {
             var msg = res.data.msg;
             if(msg === 'ok'){
                 console.log(res);
-                this.movieDetail = res.data.data.detailMovie;
+				this.movieDetail = res.data.data.detailMovie;
+				this.movieimg = res.data.data.detailMovie.img;
                 // swiper制作轮播
                 this.$nextTick(()=>{
                     new Swiper(this.$refs.detail_player, {
