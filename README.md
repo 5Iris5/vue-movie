@@ -26,6 +26,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 > project 
 
 ### 前端部分
-* 前端
+* 技术栈: Vue
+* 插件: better-scroll
+* 功能模块
 
 
