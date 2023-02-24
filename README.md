@@ -47,4 +47,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## 📄 License
 
 [MIT](./LICENSE)
-Copyright (c) 2020 [IrisLong](https://github.com/5Iris5)
+Copyright (c) 2019 [IrisLong](https://github.com/5Iris5)
