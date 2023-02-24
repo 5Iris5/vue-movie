@@ -1,26 +1,3 @@
-# vue-movie
-
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-
 <div align="center">
   <h1>移动端电影app</h1>
 </div>
@@ -36,5 +13,27 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - 使用vuex状态管理处理组件间的复杂通信，比如：城市定位等；
 - 使用props、$refs等进行简单的父子组件通信;
 - 使用动态路由/命名路由完成点击跳转电影详情页面的功能等
+
+## 🚀 开发
+
+```bash
+# 配置
+1. node 版本 16+
+2. pnpm 版本 7.x
+
+# 克隆项目
+git clone 
+
+# 进入项目目录
+cd vue-movie
+
+# 安装依赖
+npm install
+
+# 启动服务
+npm run dev
+```
+
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
